@@ -1,0 +1,25 @@
+<div class="user-info">
+    <div class="container" *ngIf="currentUser$ | async as user">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 offset-md-1">
+                <img class="user-pic" [alt]="user.username" class="user-img"
+                    [src]="user.image">
+                <h4><b>{{user.username}}</b></h4>
+                <p>{{user.bio}}</p>
+                <a class="btn btn-sm btn-outline-secondary action-btn pull-xs-right" [routerLink]="['/settings']"><i class="ion-gear-a"></i> Edit
+                    Profile Settings </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container page">
+    <div class="row">
+        <div class="col-md-9">
+            <mc-feed-toggler [tagName]="tagName" [profile]="true"></mc-feed-toggler>
+            <app-feed [apiUrl]="apiUrl"></app-feed>
+        </div>
+        <div class="col-md-3">
+            <mc-popular-tags></mc-popular-tags>
+        </div>
+    </div>
+</div>

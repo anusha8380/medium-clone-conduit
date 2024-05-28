@@ -1,0 +1,36 @@
+<div class="editor-page" *ngIf="data$ | async as data">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-xs-12">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(data.article?.slug)">
+                    <fieldset>
+                        <textarea placeholder="Write a comment..." rows="3" class="form-control"
+                            formControlName="body"></textarea>
+                    </fieldset>
+                    <fieldset class="flex">
+                        <img alt="user image" class="user-img" src="https://api.realworld.io/images/smiley-cyrus.jpeg">
+                        <button type="submit" class="btn btn-sm btn-primary comment-btn"> Post Comment </button>
+                    </fieldset>
+                </form>
+                <!-- TBD nned to save data to a DB -->
+                <!-- <div class="card">
+                    <div class="card-block">
+                        <p class="card-text"> {{data?.comments}} </p>
+                    </div>
+                    <div class="flex">
+                        <div>
+                            <a class="comment-author" href="/profile/testingg"><img alt="user image"
+                                class="user-img" src="https://api.realworld.io/images/smiley-cyrus.jpeg"></a> &nbsp;
+                        <a class="comment-author" href="/profile/testingg"> testingg </a><span class="date-posted"> May
+                            27, 2024
+                        </span>
+                        </div>
+                        <div class="comment-btn"><i class="ion-trash-a"></i></div>
+                    </div>
+                </div> -->
+            </div>
+
+        </div>
+
+    </div>
+</div>

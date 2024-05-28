@@ -1,0 +1,33 @@
+<ng-container *ngIf="data$ | async as data">
+    <nav class="navbar navbar-light">
+        <div class="container">
+            <a class="navbar-brand" routerLink="/">Medium</a>
+        </div>
+        <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item">
+                <a class="nav-link" [routerLinkActive]="['active']" routerLink="/" [routerLinkActiveOptions]="{exact : true}">Home</a>
+            </li>
+            <ng-container *ngIf="data.currentUser">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLinkActive]="['active']" routerLink="/articles/new"><i class="ion-compose"></i>&nbsp; New Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLinkActive]="['active']" routerLink="/settings"><i class="ion-gear-a"></i>&nbsp; Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/profile', data.currentUser.username]" [routerLinkActive]="['active']"><i
+                            class="ion-gear-a"></i>&nbsp; <img class="user-pic" [src]="data.currentUser.image" />
+                        {{data.currentUser.username}}</a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="data.currentUser === null">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" [routerLinkActive]="['active']"><i class="ion-compose"></i>&nbsp; Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/register" [routerLinkActive]="['active']"><i class="ion-gear-a"></i>&nbsp; Sign In</a>
+                </li>
+            </ng-container> 
+        </ul>
+    </nav>
+</ng-container>

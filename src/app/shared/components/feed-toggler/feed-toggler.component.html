@@ -1,0 +1,28 @@
+<div class="feed-toggle">
+    <ul class="nav nav-pills outline-active">
+        <li class="nav-item" *ngIf="(currentUser$|async) && !profile">
+            <a class="nav-link" routerLink="/feed" routerLinkActive="active">Your feed</a>
+        </li>
+        <li class="nav-item" *ngIf="!profile">
+            <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}"
+                queryParamsHandling="merge">Global feed</a>
+        </li>
+        <li class="nav-item" *ngIf="tagName && !profile">
+            <a class="nav-link" [routerLink]="['/tags', tagName]" routerLinkActive="active">
+                <i class="ion-pound"></i>
+                {{tagName}}
+            </a>
+        </li>
+        <ng-container *ngIf="profile">
+            <li class="nav-item" *ngIf="currentUser$|async as user ">
+                <a class="nav-link" [routerLink]="['/profile', user.username]" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact : true}">My posts</a>
+            </li>
+            <li class="nav-item" *ngIf="(currentUser$|async) as user">
+                <a class="nav-link" [routerLink]="['/profile', user.username, 'favorites']"
+                    routerLinkActive="active">Favourited posts</a>
+            </li>
+        </ng-container>
+
+    </ul>
+</div>

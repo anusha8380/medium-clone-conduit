@@ -1,0 +1,12 @@
+<ng-container *ngIf="data$ | async as data">
+
+    <div *ngIf="data.error">{{data.error}}</div>
+    <div *ngIf="data.isLoading">Loading...</div>
+    <div class="sidebar" *ngIf="data.popularTags">
+        <p>Popular Tags</p>
+        <div class="tag-list">
+            <a *ngFor="let popularTag of data.popularTags" [routerLink]="['/tags', popularTag]"
+                class="tag-default tag-pill">{{ popularTag }}</a>
+        </div>
+    </div>
+</ng-container>

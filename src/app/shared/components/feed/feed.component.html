@@ -1,0 +1,34 @@
+<ng-container *ngIf="data$ | async as data">
+    <div *ngIf="data.error">{{data.error}}</div>
+    <div *ngIf="data.isLoading">Loading...</div>
+    {{data.feedData?.articlesCount === 0 ? 'No articles are here yet..' : ''}}
+    <div *ngIf="data.feedData">
+        <div class="article-preview" *ngFor="let articles of data.feedData.articles">
+            <div class="article-meta">
+                <a [routerLink]="['/profiles', articles.author.username]">
+                    <img [src]="articles.author.image" />
+                </a>
+                <div class="info">
+                    <a [routerLink]="['/profiles', articles.author.username]">
+                        {{articles.author.username}}
+                    </a>
+                    <span class="date">{{articles.createdAt | date}}</span>
+                </div>
+                <div class="pull-xs-right">
+                    <mc-add-to-favorites [isFavorited]="articles.favorited" [articleSlug]="articles.slug"
+                        [favoritesCount]="articles.favoritesCount">
+                    </mc-add-to-favorites>
+                </div>
+            </div>
+            <a class="preview-link" [routerLink]="['/articles', articles.slug]">
+                <h1>{{articles.title}}</h1>
+                <p>{{articles.description}}</p>
+                <span>Read more...</span>
+                <mc-tag-list [tags]="articles.tagList"></mc-tag-list>
+            </a>
+        </div>
+        <mc-pagination [total]="data.feedData.articlesCount" [limit]="limit" [url]="baseUrl"
+            [currentPage]="currentPage"></mc-pagination>
+    </div>
+
+</ng-container>
